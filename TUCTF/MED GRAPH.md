@@ -16,41 +16,30 @@ With the help of Chatgpt, I wrote a python script
 import hashlib
 import random
 import string
-```
 
-```python
 def generate_random_word(length=8):
-"""Generate a random word of the specified length."""
-return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
-```
+    return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
-```python
 def find_collision(target_prefix):
-"""Find a word whose MD5 hash starts with the target prefix."""
-attempts = 0
-while True:
-# Generate a random word
-word = generate_random_word(random.randint(5, 10))  # Random word length between 5 and 10
-# Hash the word using MD5
-hash_value = hashlib.md5(word.encode()).hexdigest()
-# Check if the first 6 characters match the target prefix
-if hash_value[:6] == target_prefix:
-return word, hash_value, attempts
-attempts += 1
-```
+    attempts = 0
+    while True:
+        # Generate a random word
+        word = generate_random_word(random.randint(5, 10))  # Random word length between 5 and 10
+        # Hash the word using MD5
+        hash_value = hashlib.md5(word.encode()).hexdigest()
+        # Check if the first 6 characters match the target prefix
+        if hash_value[:6] == target_prefix:
+            return word, hash_value, attempts
+        attempts += 1
 
-```python
-if **name** == "**main**":
-target_prefix = "c58360"
-print(f"Target prefix: {target_prefix}")
-```
-
-```python
-word, hash_value, attempts = find_collision(target_prefix)
-print(f"Collision found!")
-print(f"Word: {word}")
-print(f"MD5 Hash: {hash_value}")
-print(f"Attempts: {attempts}")
+if __name__ == "__main__":
+    target_prefix = "c58360"
+    print(f"Target prefix: {target_prefix}")
+    word, hash_value, attempts = find_collision(target_prefix)
+    print("Collision found!")
+    print(f"Word: {word}")
+    print(f"MD5 Hash: {hash_value}")
+    print(f"Attempts: {attempts}")
 
 ```
 
